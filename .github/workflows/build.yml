@@ -18,21 +18,22 @@ jobs:
 
       - name: Download and extract Image Builder
         run: |
-          wget -q https://downloads.openwrt.org/releases/23.05.5/targets/ipq40xx/generic/openwrt-imagebuilder-23.05.5-ipq40xx-generic.Linux-x86_64.tar.zst
-          tar --zstd -xvf openwrt-imagebuilder-23.05.5-ipq40xx-generic.Linux-x86_64.tar.zst
+          # 使用正确的版本号 23.05.2 和文件扩展名 .tar.xz
+          wget -q https://downloads.openwrt.org/releases/23.05.2/targets/ipq40xx/generic/openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64.tar.xz
+          # 使用 xz 解压，而不是 zstd
+          tar -xvf openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64.tar.xz
 
       - name: Add third-party feed for PassWall
         run: |
-          cd openwrt-imagebuilder-23.05.5-ipq40xx-generic.Linux-x86_64
+          cd openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64
           # 添加包含 PassWall 预编译包的 feed
-          # 注意：以下 URL 为示例，实际可用性取决于 feed 维护者是否提供 ipq40xx 23.05 的包
-          # 如果构建时提示找不到包，说明该 feed 不适用于你的架构，需要更换其他 feed
+          # 注意：feed 的可用性取决于维护者是否提供对应架构的包
           echo 'src/gz passwall https://raw.githubusercontent.com/mrbtmn/openwrt-passwall-build/main/packages/arm_cortex-a7_neon-vfpv4' >> repositories.conf
           cat repositories.conf
 
       - name: Build firmware
         run: |
-          cd openwrt-imagebuilder-23.05.5-ipq40xx-generic.Linux-x86_64
+          cd openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64
 
           make image \
             PROFILE=p2w_r619ac-128m \
