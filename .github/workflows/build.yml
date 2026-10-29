@@ -30,7 +30,7 @@ jobs:
           # release 23.05 对应的版本是 23.05
           BASE_URL="https://master.dl.sourceforge.net/project/openwrt-passwall-build/releases/packages-23.05/arm_cortex-a7_neon-vfpv4"
 
-          # 添加 PassWall 的多个子源
+          # 为 PassWall 的各个子仓库分别添加精确地址
           echo "src/gz passwall_luci ${BASE_URL}/passwall_luci" >> repositories.conf
           echo "src/gz passwall_packages ${BASE_URL}/passwall_packages" >> repositories.conf
           echo "src/gz passwall2 ${BASE_URL}/passwall2" >> repositories.conf
@@ -42,7 +42,6 @@ jobs:
         run: |
           cd openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64
 
-          # 在 PACKAGES 中显式加入 PassWall 和广告过滤插件
           make image \
             PROFILE=p2w_r619ac-128m \
             PACKAGES="luci-app-adblock luci-app-passwall luci-i18n-adblock-zh-cn luci-i18n-passwall-zh-cn" \
