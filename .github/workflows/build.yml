@@ -25,10 +25,10 @@ jobs:
         run: |
           cd openwrt-imagebuilder-23.05.2-ipq40xx-generic.Linux-x86_64
 
-          # 构建纯净固件，包含完整的中文界面、基础UI组件、Argon主题和广告过滤
+          # 构建纯净固件，包含完整的中文界面、基础UI组件和广告过滤
           make image \
             PROFILE=p2w_r619ac-128m \
-            PACKAGES="luci luci-ssl luci-app-firewall luci-app-opkg luci-theme-argon luci-i18n-base-zh-cn luci-i18n-firewall-zh-cn luci-i18n-opkg-zh-cn luci-app-adblock luci-i18n-adblock-zh-cn" \
+            PACKAGES="luci luci-ssl luci-app-firewall luci-app-opkg luci-i18n-base-zh-cn luci-i18n-firewall-zh-cn luci-i18n-opkg-zh-cn luci-app-adblock luci-i18n-adblock-zh-cn" \
             ROOTFS_PARTSIZE=64
 
       - name: Upload firmware artifacts
